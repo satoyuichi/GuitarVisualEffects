@@ -1,1 +1,1 @@
-# GuitarGame
+# GuitarVisualEffects
