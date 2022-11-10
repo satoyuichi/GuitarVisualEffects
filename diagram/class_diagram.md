@@ -19,11 +19,17 @@ classDiagram
         +size() int
     }
     
-    Effect <|-- LineEffect
+    class VisualEffect {
+    	-PShader shader
+    }
+    
+    Effect <|.. VisualEffect
+    VisualEffect <|-- LineEffect
     Effect -- SignalProcesser
     EffectManager *-- Effect
     EffectManager -- Renderer
     EffectManager -- InputManager
-	
-	Renderer *-- SignalProcesser
+    Renderer *-- SignalProcesser
+    Renderer -- Sequencer
+    Sequencer -- Effect
 ```
