@@ -17,10 +17,15 @@ abstract class VisualEffect implements Effect {
     void initMatrixes() {
         l2w = new PMatrix3D();
         l2w.reset();
-        w2v = new PMatrix3D(l2w);
+        w2v = new PMatrix3D(
+			1.0, 0.0, 0.0, 0.0,
+			0.0, 1.0, 0.0, 0.0,
+			0.0, 0.0, 1.0, -10.0,
+			0.0, 0.0, 0.0, 1.0
+			);
         v2p = new PMatrix3D(
             2.0 / width, 0.0, 0.0, -1.0,
-            0.0, 2 / height, 0.0,  -1.0,
+            0.0, 2.0 / height, 0.0,  -1.0,
             0.0, 0.0, -1.0 / (farClip - nearClip), -nearClip / (farClip - nearClip),
             0.0, 0.0, 0.0, 1.0
             );
@@ -31,13 +36,13 @@ abstract class VisualEffect implements Effect {
 
     void preMatrix() {
         mvp.reset();
-        mvp.preApply(v2p);
-        mvp.preApply(w2v);
         mvp.preApply(l2w);
+        mvp.preApply(w2v);
+        mvp.preApply(v2p);
     }
 
     void setUniforms() {
-		this.shader.set("uTime", millis() / 1000.0);
+		this.shader.set("uTime", millis());
         this.shader.set("uWorld", l2w);
         this.shader.set("uCamera", w2v);
         this.shader.set("uProjection", v2p);

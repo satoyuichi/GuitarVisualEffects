@@ -15,22 +15,14 @@ class LineEffect extends VisualEffect {
     
 	public void apply(SignalProcesser sp) {
 //		background(255);
-		
-		/* beginCamera(); { */
-		/* 	camera( */
-		/* 		width / 2.0, height / 2.0, 0.0, // eye */
-		/* 		width / 2.0, height / 2.0, 0.0, // center */
-		/* 		0.0, 1.0, 0.0 // up */
-		/* 		); */
-		/* } endCamera(); */
 
+		preMatrix();
         setUniforms();
 		shader(this.shader, LINES);
-		beginShape(LINES); {
-			for(int i = 0; i < vertexes.length; i++) {
- 				vertex(vertexes[i].x, vertexes[i].y, 0.0, 1.0);
-			}
-		} endShape();
+		for(int i = 0; i < vertexes.length; i++) {
+			vertex(vertexes[i].x, vertexes[i].y, 0.0, 1.0);
+//			line(vertexes[i].x, vertexes[i].y, vertexes[i + 1].x, vertexes[i + 1].y);
+		}
 		resetShader();
 	}
 }
