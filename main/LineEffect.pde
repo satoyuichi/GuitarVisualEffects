@@ -4,8 +4,8 @@ class LineEffect extends VisualEffect {
 	LineEffect() {
 		super();
 
-		vertexes[0] = new PVector(0, height * 0.5f);
-		vertexes[1] = new PVector(width, height * 0.5f);
+		vertexes[0] = new PVector(-width, height * 0.5f, 0.0);
+		vertexes[1] = new PVector(width, height * 0.5f, 0.0);
 	}
 
     void loadShaders() {
@@ -16,15 +16,15 @@ class LineEffect extends VisualEffect {
 	public void apply(SignalProcesser sp) {
 //		background(255);
 		
-		beginCamera(); {
-			camera(
-				width / 2.0, height / 2.0, 0.0, // eye
-				width / 2.0, height / 2.0, 0.0, // center
-				0.0, 1.0, 0.0 // up
-				);
-		} endCamera();
+		/* beginCamera(); { */
+		/* 	camera( */
+		/* 		width / 2.0, height / 2.0, 0.0, // eye */
+		/* 		width / 2.0, height / 2.0, 0.0, // center */
+		/* 		0.0, 1.0, 0.0 // up */
+		/* 		); */
+		/* } endCamera(); */
 
-		this.shader.set("time", millis() / 1000.0);
+        setUniforms();
 		shader(this.shader, LINES);
 		beginShape(LINES); {
 			for(int i = 0; i < vertexes.length; i++) {
