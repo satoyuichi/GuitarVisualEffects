@@ -7,6 +7,8 @@ void setup() {
 
     le = new LineEffect();
     sp = new SignalProcesser();
+
+    hint(DISABLE_OPTIMIZED_STROKE);
 }
 
 void draw() {

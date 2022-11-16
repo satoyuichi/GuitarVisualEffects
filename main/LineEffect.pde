@@ -11,6 +11,7 @@ class LineEffect extends VisualEffect {
     void loadShaders() {
 		this.shader = loadShader("./shaders/frag/basic_frag.glsl",
 								 "./shaders/vert/basic_vert.glsl");
+        this.shader.bind();
     }
     
 	public void apply(SignalProcesser sp) {
@@ -18,11 +19,14 @@ class LineEffect extends VisualEffect {
 
 		preMatrix();
         setUniforms();
-		shader(this.shader, LINES);
+		shader(this.shader);
+//        beginShape(LINES);
 		for(int i = 0; i < vertexes.length; i++) {
-			vertex(vertexes[i].x, vertexes[i].y, 0.0, 1.0);
+			vertex(vertexes[i].x, vertexes[i].y, 0.0);
 //			line(vertexes[i].x, vertexes[i].y, vertexes[i + 1].x, vertexes[i + 1].y);
 		}
+//        box(300);
+//        endShape();
 		resetShader();
 	}
 }
