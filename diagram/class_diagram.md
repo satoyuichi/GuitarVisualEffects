@@ -24,7 +24,8 @@ classDiagram
     }
     
     Effect <|.. VisualEffect
-    VisualEffect <|-- LineEffect
+    VisualEffect <|-- PolygonalLineEffect
+    VisualEffect <|-- PolarEffect
     Effect -- SignalProcesser
     EffectManager *-- Effect
     EffectManager -- Renderer
