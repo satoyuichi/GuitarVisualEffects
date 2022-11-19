@@ -1,4 +1,5 @@
 PolygonalLineEffect ple;
+PolarEffect pe;
 SignalProcesser sp;
 
 void setup() {
@@ -6,6 +7,7 @@ void setup() {
 	
 	sp = new SignalProcesser(this);
 	ple = new PolygonalLineEffect();
+	pe = new PolarEffect();
 }
 
 void draw() {
@@ -13,4 +15,5 @@ void draw() {
 	background(128);
 	sp.process();
 	ple.apply(sp);
+	pe.apply(sp);
 }
