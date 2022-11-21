@@ -6,7 +6,7 @@ class Renderer {
 		parent = app;
 	}
 	
-	void render(SignalProcesser sp, EffectManager em) {
+	void render(SignalProcessor sp, EffectManager em) {
 		loadPixels();
 		prevBB = new PImage(width, height, pixels, true, parent);
 

@@ -4,6 +4,6 @@ class LineEffect extends VisualEffect {
 		super();
 	}
 	
-	public void apply(Renderer renderer, SignalProcesser sp) {
+	public void apply(Renderer renderer, SignalProcessor sp) {
 	}
 }

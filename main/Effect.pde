@@ -1,3 +1,3 @@
 interface Effect {
-	public abstract void apply(Renderer renderer, SignalProcesser sp);
+	public abstract void apply(Renderer renderer, SignalProcessor sp);
 }
