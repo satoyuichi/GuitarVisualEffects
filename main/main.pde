@@ -10,6 +10,7 @@ void setup() {
 	renderer = new Renderer(this);
 	em = new EffectManager();
 	em.add(new PolygonalLineEffect());
+	em.add(new WarpEffect());
 	em.add(new PolarEffect());
 	em.add(new BarEqualizerEffect());
 }
