@@ -4,6 +4,6 @@ abstract class VisualEffect implements Effect {
 	final String vertSource = "";
 
 	VisualEffect() {
-		shader = loadShader(fragSource, vertSource);
+//		shader = loadShader(fragSource, vertSource);
 	}
 }
