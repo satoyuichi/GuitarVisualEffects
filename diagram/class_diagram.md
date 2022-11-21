@@ -2,13 +2,14 @@
 classDiagram
     class Effect {
         <<interface>>
-        +apply(signal_processer)
+        +apply(renderer, signal_processor)
     }
     
     class Renderer {
-        -SignalProcesser sp
+        -PImage prevBB
+        -PApplet parent
         
-        +renderer(effect_manager)
+        +renderer(signal_processor effect_manager)
     }
     
     class EffectManager {
@@ -23,10 +24,19 @@ classDiagram
     	-PShader shader
     }
     
+    class SignalProcesser {
+        +process()
+        +getSpectrum(index) float
+        +getWaveform(index) float
+        +getAmplitude() float
+        +getSampleSize() int
+    }
+    
     Effect <|.. VisualEffect
     VisualEffect <|-- PolygonalLineEffect
     VisualEffect <|-- PolarEffect
     VisualEffect <|-- BarEqualizerEffect
+    VisualEffect <|-- WarpEffect
     Effect -- SignalProcesser
     EffectManager *-- Effect
     EffectManager -- Renderer
