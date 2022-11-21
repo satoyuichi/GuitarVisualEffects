@@ -3,8 +3,8 @@ EffectManager em;
 Renderer renderer;
 
 void setup() {
-	//	size(320, 240, P3D);
-		fullScreen(P3D);
+	//size(320, 240, P3D);
+	fullScreen(P3D);
 
 	sp = new SignalProcessor(this);
 	renderer = new Renderer(this);
