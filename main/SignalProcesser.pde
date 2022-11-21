@@ -3,20 +3,24 @@ import processing.sound.*;
 class SignalProcesser {
 	Sound sound;
 	FFT fft;
+	Waveform waveform;
+	Amplitude amp;
+
 	AudioIn audioIn;
 	SoundFile soundFile;
-	Waveform waveform;
 
-	final int BANDS = 1024;
+	final int SAMPLES = 1024;
 
-	float[] spectrum = new float[BANDS];
+	float[] spectrum = new float[SAMPLES];
+	float ampValue;
 
 	SignalProcesser(PApplet parent) {
 		Sound.list();
 		sound = new Sound(parent);
 		sound.inputDevice(0);
 
-		fft = new FFT(parent, BANDS);
+		initAnalyzer(parent);
+
 		audioIn = new AudioIn(parent, 0);
 
 //		audioIn.start();
@@ -26,21 +30,39 @@ class SignalProcesser {
 		soundFile.loop();
 		soundFile.play();
 		fft.input(soundFile);
+		waveform.input(soundFile);
+		amp.input(soundFile);
+	}
+
+	void initAnalyzer(PApplet parent) {
+		fft = new FFT(parent, SAMPLES);
+		waveform = new Waveform(parent, SAMPLES);
+		amp = new Amplitude(parent);
 	}
 
 	void process() {
 		fft.analyze(spectrum);
+		waveform.analyze();
+		ampValue = amp.analyze();
 	}
 
 	float getSpectrum(int i) {
 		return spectrum[i];
 	}
 
+	float getWaveform(int i) {
+		return waveform.data[i];
+	}
+
+	float getAmplitude() {
+		return ampValue;
+	}
+
 	void tearDown() {
 		audioIn.stop();
 	}
 
-	int getBandSize() {
-		return BANDS;
+	int getSampleSize() {
+		return SAMPLES;
 	}
 }
