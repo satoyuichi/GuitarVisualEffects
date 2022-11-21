@@ -5,9 +5,9 @@ class BarEqualizerEffect extends VisualEffect {
 		super();
 	}
 
-	public void apply(Renderer renderer, SignalProcesser sp) {
+	public void apply(Renderer renderer, SignalProcessor sp) {
 		int sampleSize = sp.getSampleSize();
-		int split = 16;
+		int split = 8;
 		int w = width / (sampleSize / split);
 		
 		colorMode(RGB);

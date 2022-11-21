@@ -1,6 +1,6 @@
 import processing.sound.*;
 
-class SignalProcesser {
+class SignalProcessor {
 	Sound sound;
 	FFT fft;
 	Waveform waveform;
@@ -9,12 +9,12 @@ class SignalProcesser {
 	AudioIn audioIn;
 	SoundFile soundFile;
 
-	final int SAMPLES = 1024;
+	final int SAMPLES = 512;
 
 	float[] spectrum = new float[SAMPLES];
 	float ampValue;
 
-	SignalProcesser(PApplet parent) {
+	SignalProcessor(PApplet parent) {
 		Sound.list();
 		sound = new Sound(parent);
 		sound.inputDevice(0);
