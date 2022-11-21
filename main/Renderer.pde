@@ -17,7 +17,7 @@ class Renderer {
 
 		for(int i = 0; i < em.size(); i++) {
 			Effect ef = em.get(i);
-			ef.apply(sp);
+			ef.apply(this, sp);
 		}
 	}
 }

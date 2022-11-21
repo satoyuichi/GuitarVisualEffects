@@ -6,7 +6,7 @@ class PolarEffect extends VisualEffect {
 		super();
 	}
 
-	public void apply(SignalProcesser sp) {
+	public void apply(Renderer renderer, SignalProcesser sp) {
 		float spectrum;
 		
 		noFill();
