@@ -1,5 +1,5 @@
 class BarEqualizerEffect extends VisualEffect {
-	final float AMPLITUDE = height * 0.8;
+	final float AMPLITUDE = height * 0.8 * SignalProcessor.BIAS;
 	final int SPLIT = 4;
 	
 	BarEqualizerEffect() {

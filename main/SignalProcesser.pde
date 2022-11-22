@@ -1,6 +1,8 @@
 import processing.sound.*;
 
 class SignalProcessor {
+    static final float BIAS = 64.0;
+
 	Sound sound;
 	FFT fft;
 	Waveform waveform;
@@ -9,7 +11,7 @@ class SignalProcessor {
 	AudioIn audioIn;
 	SoundFile soundFile;
 
-	final int SAMPLES = 512;
+	final int SAMPLES = 256;
 
 	float[] spectrum = new float[SAMPLES];
 	float ampValue;
@@ -17,21 +19,23 @@ class SignalProcessor {
 	SignalProcessor(PApplet parent) {
 		Sound.list();
 		sound = new Sound(parent);
-		sound.inputDevice(0);
+		sound.inputDevice(7);
 
 		initAnalyzer(parent);
 
 		audioIn = new AudioIn(parent, 0);
 
-//		audioIn.start();
-//		fft.input(audioIn);
+		audioIn.start();
+		fft.input(audioIn);
+        waveform.input(audioIn);
+        amp.input(audioIn);
 
-		soundFile = new SoundFile(parent, "strings.wav");
-		soundFile.loop();
-		soundFile.play();
-		fft.input(soundFile);
-		waveform.input(soundFile);
-		amp.input(soundFile);
+		//soundFile = new SoundFile(parent, "strings.wav");
+		//soundFile.loop();
+		//soundFile.play();
+		//fft.input(soundFile);
+		//waveform.input(soundFile);
+		//amp.input(soundFile);
 	}
 
 	void initAnalyzer(PApplet parent) {
