@@ -1,8 +1,10 @@
 import processing.sound.*;
 
 class SignalProcessor {
-    static final float BIAS = 64.0;
+    float bias = 1.0;
 
+	PApplet parent;
+	
 	Sound sound;
 	FFT fft;
 	Waveform waveform;
@@ -16,26 +18,19 @@ class SignalProcessor {
 	float[] spectrum = new float[SAMPLES];
 	float ampValue;
 
-	SignalProcessor(PApplet parent) {
+	boolean isDebug = false;
+
+	SignalProcessor(PApplet app) {
+		parent = app;
+		
 		Sound.list();
 		sound = new Sound(parent);
-		sound.inputDevice(7);
 
 		initAnalyzer(parent);
+	}
 
-		audioIn = new AudioIn(parent, 0);
-
-		audioIn.start();
-		fft.input(audioIn);
-        waveform.input(audioIn);
-        amp.input(audioIn);
-
-		//soundFile = new SoundFile(parent, "strings.wav");
-		//soundFile.loop();
-		//soundFile.play();
-		//fft.input(soundFile);
-		//waveform.input(soundFile);
-		//amp.input(soundFile);
+	void setDebugMode(boolean mode) {
+		isDebug = mode;
 	}
 
 	void initAnalyzer(PApplet parent) {
@@ -50,6 +45,26 @@ class SignalProcessor {
 		ampValue = amp.analyze();
 	}
 
+	void setInputDevice(int i) {
+		sound.inputDevice(i);
+
+		if(isDebug) {
+			soundFile = new SoundFile(parent, "strings.wav");
+			soundFile.loop();
+			soundFile.play();
+			fft.input(soundFile);
+			waveform.input(soundFile);
+			amp.input(soundFile);
+		}
+		else {
+			audioIn = new AudioIn(parent, 0);
+			audioIn.start();
+			fft.input(audioIn);
+			waveform.input(audioIn);
+			amp.input(audioIn);
+		}
+	}
+
 	float getSpectrum(int i) {
 		return spectrum[i];
 	}
@@ -62,10 +77,14 @@ class SignalProcessor {
 		return ampValue;
 	}
 
-	void tearDown() {
-		audioIn.stop();
+	void setBias(float b) {
+		bias = b;
 	}
 
+	float getBias() {
+		return bias;
+	}
+	
 	int getSampleSize() {
 		return SAMPLES;
 	}
