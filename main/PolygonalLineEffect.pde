@@ -1,5 +1,5 @@
 class PolygonalLineEffect extends VisualEffect {
-	final float AMPLITUDE = height * 0.3 * SignalProcessor.BIAS;
+	final float AMPLITUDE = height * 0.3;
 
 	PolygonalLineEffect() {
 		super();
@@ -13,10 +13,12 @@ class PolygonalLineEffect extends VisualEffect {
 		colorMode(RGB);
 		blendMode(BLEND);
 		beginShape();
+
+		float bias = AMPLITUDE * sp.getBias();
 		for(int i = 0, sampleSize = sp.getSampleSize(); i < sampleSize; i += 4) {
 			spectrum = sp.getWaveform(i);
             stroke(128 + spectrum * 255);
-			curveVertex(i * width / sampleSize, height * 0.5 + spectrum * AMPLITUDE);
+			curveVertex(i * width / sampleSize, height * 0.5 + spectrum * bias);
 		}
 		endShape();
 	}

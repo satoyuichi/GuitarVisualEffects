@@ -1,5 +1,5 @@
 class BarEqualizerEffect extends VisualEffect {
-	final float AMPLITUDE = height * 0.8 * SignalProcessor.BIAS;
+	final float AMPLITUDE = height * 0.8;
 	final int SPLIT = 4;
 	
 	BarEqualizerEffect() {
@@ -15,9 +15,10 @@ class BarEqualizerEffect extends VisualEffect {
 		blendMode(ADD);
 		rectMode(CORNER);
 
+		float bias = AMPLITUDE * sp.getBias();
 		for(int i = 0; i < (sampleSize / SPLIT); i++) {
 			fill(lerpColor(color(32, 32, 64), color(32, 32, 255), min(0.2, sp.getSpectrum(i))));
-			rect(i * w, height - sp.getSpectrum(i) * AMPLITUDE, w, sp.getSpectrum(i) * AMPLITUDE);
+			rect(i * w, height - sp.getSpectrum(i) * bias, w, sp.getSpectrum(i) * bias);
 		}
 	}
 }
